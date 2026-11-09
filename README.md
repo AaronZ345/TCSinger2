@@ -1,16 +1,20 @@
-<div align="center">
+# TCSinger 2: Customizable Multilingual Zero-shot Singing Voice Synthesis
 
-# TCSinger 2
+Yu Zhang, Wenxiang Guo, Changhao Pan, Dongyu Yao, Zhiyuan Zhu, Ziyue Jiang, Yuhan Wang, Tao Jin, Zhou Zhao\
+*Zhejiang University*
 
-**Customizable multilingual zero-shot singing voice synthesis**
+[ACL 2025 Findings](https://2025.aclweb.org/)
 
-[ACL 2025](https://arxiv.org/abs/2505.14910)
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/2505.14910)
+[![Demo](https://img.shields.io/badge/🚀%20Demo%20Page-blue)](https://aaronz345.github.io/TCSinger2Demo/)
+[![GitHub Stars](https://img.shields.io/github/stars/AaronZ345/TCSinger2?style=social&label=GitHub+Stars)](https://github.com/AaronZ345/TCSinger2)
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b?style=flat-square)](https://arxiv.org/abs/2505.14910) [![Demo](https://img.shields.io/badge/Demo-Samples-2563eb?style=flat-square)](https://aaronz345.github.io/TCSinger2Demo/) [![Stars](https://img.shields.io/github/stars/AaronZ345/TCSinger2?style=flat-square)](https://github.com/AaronZ345/TCSinger2)
+[![语音之家](https://img.shields.io/badge/-WeChat@语音之家-000000?logo=wechat&logoColor=07C160)](https://mp.weixin.qq.com/s/Uvt27dt2S3TpBjJccl9mTA)
+[![PaperWeekly](https://img.shields.io/badge/-WeChat@PaperWeekly-000000?logo=wechat&logoColor=07C160)](https://mp.weixin.qq.com/s/c6CPx14y_wASU_dSXKcAJQ)
+[![知乎](https://img.shields.io/badge/-知乎-000000?logo=zhihu&logoColor=0084FF)](https://zhuanlan.zhihu.com/p/1928562845236303816)
 
-[Quick start](#quick-start) · [Model assets](#model-assets) · [Input format](#input-format) · [Training](docs/training.md) · [Citation](#citations)
-
-</div>
+> **Start here** · [Quick start](#quick-start) · [Model assets](#model-assets)\
+> **Reference** · [Input format](#input-format) · [Training](docs/training.md) · [Citation](#citations)
 
 TCSinger 2 models multilingual singing with style transfer and control from audio and text prompts. This repository provides training and inference code; prepare your trained checkpoints and the auxiliary models before generation.
 
@@ -20,13 +24,6 @@ TCSinger 2 models multilingual singing with style transfer and control from audi
 | Model checkpoint | Your trained TCSinger 2 model, VAE, and matching encoders |
 | Output | 48 kHz singing waveform |
 | Runtime | Python 3.10, PyTorch 2.1.0 + CUDA 12.1 |
-
-```mermaid
-flowchart TB
-    score["Phonemes, score, and F0"] --> model["TCSinger 2"]
-    prompt["Audio and style prompts"] --> model
-    model --> vocoder["HIFI-GAN"] --> output["Generated singing"]
-```
 
 ## Quick start
 
@@ -80,14 +77,10 @@ Inference handles every eligible row (duration up to 20 seconds), including sing
 TCSinger 2 uses a Blurred Boundary Content Encoder, a contrastive Custom Audio Encoder, and a Flow-based Custom Transformer with Cus-MOE and F0 conditioning. See the [paper](https://arxiv.org/abs/2505.14910) for comparisons across style transfer, style control, cross-lingual transfer, and speech-to-singing transfer.
 
 <details>
-<summary>Release history and authors</summary>
+<summary>Release history</summary>
 
 - July 2025: released TCSinger 2 code and [STARS](https://github.com/gwx314/STARS).
-- May 2025: accepted to ACL 2025.
-
-Yu Zhang, Wenxiang Guo, Changhao Pan, Dongyu Yao, Zhiyuan Zhu, Ziyue Jiang, Yuhan Wang, Tao Jin, Zhou Zhao | Zhejiang University
-
-[语音之家](https://mp.weixin.qq.com/s/Uvt27dt2S3TpBjJccl9mTA) · [PaperWeekly](https://mp.weixin.qq.com/s/c6CPx14y_wASU_dSXKcAJQ) · [知乎](https://zhuanlan.zhihu.com/p/1928562845236303816)
+- May 2025: accepted to ACL 2025 Findings.
 
 </details>
 
