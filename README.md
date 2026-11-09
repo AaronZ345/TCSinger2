@@ -72,7 +72,7 @@ python preprocess/mel_spec_48k.py --tsv_path data/new/data.tsv --num_gpus 1 --ma
 7. Post-process:
 
 ```bash
-python preprocess/postprocess_data.py
+python preprocess/postprocess.py
 ```
 
 ### Training TCSinger 2
@@ -100,6 +100,10 @@ python scripts/test_sing.py
 ```
 
 *Replace the checkpoint path and CFG coefficient as required. For speech inputs, modify the VAE accordingly.*
+
+Inference processes every eligible manifest row (duration up to 20 seconds) by default, including a single row and repeated item names. To select a reproducible subset, pass `--sample-limit 10 --sample-seed 0`; a limit above the available row count selects all eligible rows. The seed controls subset selection, not waveform generation.
+
+Multiple GPUs receive disjoint rows without padding the dataset. Each rank writes its own CSV; after all ranks finish, `clap.csv` combines their results in original manifest order. The `manifest_index` column identifies the source row.
 
 
 ## Acknowledgements
