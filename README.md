@@ -1,9 +1,9 @@
 <h1>TCSinger 2: Customizable Multilingual Zero-shot Singing Voice Synthesis<br>
-  <a href="https://2025.aclweb.org/"><img src="assets/readme/venue-mark.png" width="60" alt="" /><img src="assets/readme/link-venue.svg" alt="ACL 2025 Findings" /></a>
+  <a href="https://2025.aclweb.org/"><img src="assets/readme/link-venue.svg" alt="ACL 2025 Findings" /></a>
 </h1>
 
 <p>
-  <strong><a href="https://aaronz345.github.io/">Yu&nbsp;Zhang</a></strong>, Wenxiang&nbsp;Guo, Changhao&nbsp;Pan, Dongyu&nbsp;Yao, Zhiyuan&nbsp;Zhu, Ziyue&nbsp;Jiang, Yuhan&nbsp;Wang, Tao&nbsp;Jin, Zhou&nbsp;Zhao&nbsp;·&nbsp;<img src="https://www.zju.edu.cn/_upload/article/images/c3/98/1fb1d281492eb477a098ef7a2901/05966b26-ab45-470d-94c1-99b1e02d12f4.png" width="38" alt="" />&nbsp;<em>Zhejiang&nbsp;University</em>
+  <strong><a href="https://aaronz345.github.io/">Yu&nbsp;Zhang</a></strong>, Wenxiang&nbsp;Guo, Changhao&nbsp;Pan, Dongyu&nbsp;Yao, Zhiyuan&nbsp;Zhu, Ziyue&nbsp;Jiang, Yuhan&nbsp;Wang, Tao&nbsp;Jin, Zhou&nbsp;Zhao&ensp;<img src="assets/readme/affiliation-zju.svg" align="absmiddle" alt="Zhejiang University" />
 </p>
 
 <p>
@@ -22,7 +22,8 @@ Start with the [model assets](#model-assets) and [input format](#input-format), 
 
 ## ![](assets/readme/section-history.svg) News
 
-- **2025.07** · Released TCSinger 2 code and [STARS](https://github.com/gwx314/STARS).
+- **2025.07** · Released TCSinger 2 code.
+- **2025.07** · Released [STARS](https://github.com/gwx314/STARS) code.
 - **2025.05** · Accepted to ACL 2025 Findings.
 
 ## ![](assets/readme/section-quick-start.svg) Quick start
