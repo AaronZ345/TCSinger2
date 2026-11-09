@@ -72,7 +72,7 @@ python preprocess/mel_spec_48k.py --tsv_path data/new/data.tsv --num_gpus 1 --ma
 7. Post-process:
 
 ```bash
-python preprocess/postprocess_data.py
+python preprocess/postprocess.py
 ```
 
 ### Training TCSinger 2
@@ -100,6 +100,8 @@ python scripts/test_sing.py
 ```
 
 *Replace the checkpoint path and CFG coefficient as required. For speech inputs, modify the VAE accordingly.*
+
+Inference processes every eligible manifest item (duration up to 20 seconds) in manifest order by default, including a single item. To select a reproducible subset, pass `--sample-limit 10 --sample-seed 0`; a limit above the available item count selects all eligible items. The seed controls subset selection, not waveform generation.
 
 
 ## Acknowledgements

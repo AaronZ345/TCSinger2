@@ -558,6 +558,10 @@ def parse_args():
         type=int,
         default=48000
     )
+    parser.add_argument("--sample-limit", type=int, default=None,
+                        help="Optional positive limit on eligible input items; default: all.")
+    parser.add_argument("--sample-seed", type=int, default=0,
+                        help="Seed for selecting a subset when --sample-limit is used.")
     return parser.parse_args()
 
 def save_df_to_tsv(dataframe, path: Union[str, Path]):
@@ -631,7 +635,7 @@ def handle_exception(err, skipped_name=''):
 
 
 class InferDataset(Dataset):
-    def __init__(self, manifest_path):
+    def __init__(self, manifest_path, sample_limit=None, sample_seed=0):
         super().__init__()
         # Load all samples from the manifest
         samples = load_samples_from_tsv(manifest_path)
@@ -644,18 +648,19 @@ class InferDataset(Dataset):
         self.pad_value = -5
         self.max_batch_len = 3760
         
-        # 随机选择50个项目名称
-        self.pred_list = random.sample(list(self.items_dict.keys()), 50)
-
-        random.shuffle(self.pred_list)
+        self.pred_list = [name for name, item in self.items_dict.items()
+                          if float(item['duration']) <= 20]
+        if not self.pred_list:
+            raise ValueError("Manifest has no eligible items with duration <= 20 seconds")
+        if sample_limit is not None:
+            if sample_limit < 1:
+                raise ValueError("sample_limit must be positive")
+            self.pred_list = random.Random(sample_seed).sample(
+                self.pred_list, min(sample_limit, len(self.pred_list)))
 
         self.items = []
         for item_name in self.pred_list:
-            if item_name not in self.items_dict:
-                continue
             item = self.items_dict[item_name]
-            if float(item['duration']) > 20:
-                continue
             item['name'] = item_name
             self.items.append(item)
         self.language_to_id = {language: idx for idx, language in enumerate(language_set)}
@@ -783,7 +788,7 @@ def gen_song(rank, args):
         init_process_group(backend=args.dist_config['dist_backend'], init_method=args.dist_config['dist_url'],
                            world_size=args.dist_config['world_size'] * args.num_gpus, rank=rank)
 
-    dataset = InferDataset(args.manifest_path)
+    dataset = InferDataset(args.manifest_path, args.sample_limit, args.sample_seed)
     ds_sampler = DistributedSampler(dataset, shuffle=False) if args.num_gpus > 1 else None
     loader = DataLoader(dataset, sampler=ds_sampler, collate_fn=dataset.collator, batch_size=1, num_workers=40, drop_last=False)
 
